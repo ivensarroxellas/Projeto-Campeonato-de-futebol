@@ -7,7 +7,7 @@ const api = axios.create({
 export const setToken = (token) => {
   api.defaults.headers.common.Authorization = token;
 };
-
+//
 export const requestData = async (endpoint) => {
   const { data } = await api.get(endpoint);
   return data;
