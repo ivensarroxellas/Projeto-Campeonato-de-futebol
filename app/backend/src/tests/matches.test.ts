@@ -3,29 +3,26 @@ import * as chai from 'chai';
 import chaiHttp = require('chai-http');
 
 import { app } from '../app';
-import Example from '../database/models/ExampleModel';
 
-import { Response } from 'superagent';
-import { ForeignKeyConstraintError } from 'sequelize';
 
 chai.use(chaiHttp);
 
 const { expect } = chai;
 
 
-describe('Teste da rota teams', () => {
+describe('Teste da rota matches', () => {
   
 
-  it('Retorno tem que ser 200 quando consulta todos os times', async () => {
+  it('Retorno tem que ser 200 quando consulta todos os matches', async () => {
     const result = await chai.request(app)
-    .get('/teams')
+    .get('/matches')
     chai.expect(result.status).to.equal(200)
   });
 
-  it('Retorno tem que ser 200 quando consulta um único time', async () => {
+ /*  it('Retorno tem que ser 200 quando consulta um único time', async () => {
     const result = await chai.request(app)
     .get('/teams/2')
     chai.expect(result.status).to.equal(200)
-  });
+  }); */
 
 });
