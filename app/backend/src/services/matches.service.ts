@@ -32,7 +32,7 @@ export default class MatchService {
     const homeTeam = await this.service.getTeamById(matchInfo.homeTeamId);
     const awayTeam = await this.service.getTeamById(matchInfo.awayTeamId);
     if (!homeTeam || !awayTeam) {
-      return { type: 404, message: 'There is no team with such id!' };
+      return { type: 404, message: { message: 'There is no team with such id!' } };
     }
     const newMatch = await this.model.create({ ...matchInfo, inProgress: true });
     return { type: 201, message: { ...newMatch.dataValues } };

@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import { type } from 'os';
 import MatchService from '../services/matches.service';
 
 export default class UserController {

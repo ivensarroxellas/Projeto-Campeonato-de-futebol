@@ -10,9 +10,10 @@ const auth: RequestHandler = (req, res, next) => {
 
   const payload = jwt.validateToken(token) as JwtPayload;
   if (payload.isError) {
-    return res.status(400).json({ message: payload.isError });
+    return res.status(400).json({ message: 'Token must be a valid token' });
   }
   req.body.user = payload;
   return next();
 };
+
 export default auth;
