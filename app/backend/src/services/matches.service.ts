@@ -8,27 +8,19 @@ export default class TeamsService {
     this.model = MatchModel;
   }
 
-  public async getAllMatches() {
+  public async getAllMatches(inProgress:string) {
     const allMatches = await this.model.findAll({
-      include: [
-        {
-          model: TeamModel,
-          as: 'homeTeam',
-          attributes: ['teamName'],
-        },
-        {
-          model: TeamModel,
-          as: 'awayTeam',
-          attributes: ['teamName'],
-        },
-      ],
+      include: [{ model: TeamModel, as: 'homeTeam', attributes: ['teamName'] },
+        { model: TeamModel, as: 'awayTeam', attributes: ['teamName'] }],
     });
-
+    if (inProgress === 'true') {
+      const matchesInProgress = allMatches.filter((match) => match.dataValues.inProgress === true);
+      return matchesInProgress;
+    }
+    if (inProgress === 'false') {
+      const matchesInProgress = allMatches.filter((match) => match.dataValues.inProgress === false);
+      return matchesInProgress;
+    }
     return allMatches;
   }
-
-  /* public async getTeamById(id: string) {
-    const teamById = await this.model.findByPk(id);
-    return teamById;
-  } */
 }

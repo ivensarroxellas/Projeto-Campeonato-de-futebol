@@ -8,22 +8,13 @@ export default class UserController {
     this.service = new MatchService();
   }
 
-  public async getAllMatches(_req:Request, res: Response) {
+  public async getAllMatches(req:Request, res: Response) {
     try {
-      const allMatches = await this.service.getAllMatches();
-      return res.status(200).send(allMatches);
+      const { inProgress } = req.query;
+      const matchesInProgress = await this.service.getAllMatches(inProgress as string);
+      return res.status(200).send(matchesInProgress);
     } catch (error) {
       console.log(error);
     }
   }
-
-  /* public async getTeamById(req:Request, res: Response) {
-    const { id } = req.params;
-    try {
-      const teamById = await this.service.getTeamById(id);
-      return res.status(200).send(teamById);
-    } catch (error) {
-      console.log(error);
-    }
-  } */
 }
