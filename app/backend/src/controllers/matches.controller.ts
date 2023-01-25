@@ -17,4 +17,24 @@ export default class UserController {
       console.log(error);
     }
   }
+
+  public async addMatchInProgress(req: Request, res: Response) {
+    try {
+      const matchData = req.body;
+      const addMatch = await this.service.addMatchInProgress(matchData);
+      return res.status(201).send(addMatch);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  public async finishMatch(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      await this.service.finishMatch(id);
+      return res.status(200).json({ message: 'Finished' });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }

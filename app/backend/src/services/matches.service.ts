@@ -1,3 +1,4 @@
+import IMatchAdd from '../interfaces/IMatchAdd';
 import MatchModel from '../database/models/Match';
 import TeamModel from '../database/models/Team';
 
@@ -22,5 +23,18 @@ export default class TeamsService {
       return matchesInProgress;
     }
     return allMatches;
+  }
+
+  public async addMatchInProgress(matchInfo: IMatchAdd) {
+    const newMatch = await this.model.create({ ...matchInfo, inProgress: true });
+    return { ...newMatch.dataValues };
+  }
+
+  public async finishMatch(id: string) {
+    const match = await this.model.update(
+      { inProgress: 'false' },
+      { where: { id } },
+    );
+    return match;
   }
 }
