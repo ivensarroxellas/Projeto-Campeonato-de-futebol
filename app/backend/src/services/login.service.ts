@@ -5,7 +5,7 @@ import ILogin from '../interfaces/ILogin';
 import IUser from '../interfaces/IUser';
 import ITypeAndMessage from '../interfaces/ITypeAndMessage';
 
-class UserService {
+class LoginService {
   public model;
   public jwt;
 
@@ -32,4 +32,4 @@ class UserService {
   }
 }
 
-export default UserService;
+export default LoginService;

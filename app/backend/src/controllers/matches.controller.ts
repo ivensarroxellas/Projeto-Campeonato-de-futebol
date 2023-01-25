@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { type } from 'os';
 import MatchService from '../services/matches.service';
 
 export default class UserController {
@@ -22,7 +23,7 @@ export default class UserController {
     try {
       const matchData = req.body;
       const addMatch = await this.service.addMatchInProgress(matchData);
-      return res.status(201).send(addMatch);
+      return res.status(addMatch.type).send(addMatch.message);
     } catch (error) {
       console.log(error);
     }
