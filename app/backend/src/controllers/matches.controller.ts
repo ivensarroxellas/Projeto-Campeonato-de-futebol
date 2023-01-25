@@ -31,8 +31,19 @@ export default class UserController {
   public async finishMatch(req: Request, res: Response) {
     try {
       const { id } = req.params;
-      await this.service.finishMatch(id);
-      return res.status(200).json({ message: 'Finished' });
+      const returned = await this.service.finishMatch(id);
+      return res.status(200).json(returned.message);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  public async updateScore(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const updateScore = req.body;
+      const returned = await this.service.updateScore(id, updateScore);
+      return res.status(200).json(returned.message);
     } catch (error) {
       console.log(error);
     }

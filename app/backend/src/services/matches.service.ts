@@ -2,6 +2,7 @@ import IMatchAdd from '../interfaces/IMatchAdd';
 import MatchModel from '../database/models/Match';
 import TeamModel from '../database/models/Team';
 import TeamService from './teams.service';
+import IScore from '../interfaces/Iscore';
 
 export default class MatchService {
   public model;
@@ -39,10 +40,19 @@ export default class MatchService {
   }
 
   public async finishMatch(id: string) {
-    const match = await this.model.update(
+    await this.model.update(
       { inProgress: 'false' },
       { where: { id } },
     );
-    return match;
+    return { message: 'Score updated!' };
+  }
+
+  public async updateScore(id: string, updateScore: IScore) {
+    const { homeTeamGoals, awayTeamGoals } = updateScore;
+    await this.model.update(
+      { homeTeamGoals, awayTeamGoals },
+      { where: { id } },
+    );
+    return { message: 'Score updated!' };
   }
 }
