@@ -19,10 +19,16 @@ describe('Teste da rota matches', () => {
     chai.expect(result.status).to.equal(200)
   });
 
- /*  it('Retorno tem que ser 200 quando consulta um único time', async () => {
+  it('Retorno tem que ser 200 quando consulta todos os matches que estão acontecendo', async () => {
     const result = await chai.request(app)
-    .get('/teams/2')
+    .get('/matches?inProgress=true')
     chai.expect(result.status).to.equal(200)
-  }); */
+  });
+
+  it('Retorno tem que ser 200 quando consulta todos os matches que já acabaram', async () => {
+    const result = await chai.request(app)
+    .get('/matches?inProgress=false')
+    chai.expect(result.status).to.equal(200)
+  });
 
 });
