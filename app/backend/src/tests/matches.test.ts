@@ -7,8 +7,6 @@ import { app } from '../app';
 
 chai.use(chaiHttp);
 
-const { expect } = chai;
-
 
 describe('Teste da rota matches', () => {
   
