@@ -1,13 +1,13 @@
 import { Router } from 'express';
 import loginValidation from '../middlewares/loginValidation';
-import UserController from '../controllers/login.controller';
+import LoginController from '../controllers/login.controller';
 import auth from '../middlewares/tokenValidation';
 
 const router = Router();
-const userController = new UserController();
+const loginController = new LoginController();
 
-router.post('/', loginValidation, userController.login.bind(userController));
-router.get('/validate', auth, userController.validate.bind(userController));
+router.post('/', loginValidation, loginController.login.bind(loginController));
+router.get('/validate', auth, loginController.validate.bind(loginController));
 
 // bind é necessário quando trabalha com classe
 export default router;
